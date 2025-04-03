@@ -1,0 +1,108 @@
+.image-slider {
+    width: 100vw; /* Full width */
+    height: 500px; /* Increase the height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: -120px; /* Adjust based on navbar height */
+}
+
+.slider-container {
+    width: 80%; /* Adjust the slider width */
+    margin: auto;
+}
+
+.slide {
+    display: flex;
+    margin-top: 45px;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make sure slides take full height */
+}
+
+.slide img {
+    width: 100%;  /* Set width to 100% of container */
+    height: 400px; /* Adjust height */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+
+/* Prevent vertical scrollbar */
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Default styles */
+.image-slider {
+    width: 100vw; /* Full width */
+    height: 500px; /* Default height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: -120px; /* Adjust based on navbar height */
+}
+
+.slider-container {
+    width: 80%; /* Adjust the slider width */
+    margin: auto;
+}
+
+.slide {
+    display: flex;
+    margin-top: 45px;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make sure slides take full height */
+}
+
+.slide img {
+    width: 100%;  /* Set width to 100% of container */
+    height: 400px; /* Adjust height */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .image-slider {
+        width: 100vw;
+        height: 350px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+
+    .slide img {
+        height: 250px;
+    }
+}
+
+/* For 414px width devices */
+@media (max-width: 414px) {
+    .image-slider {
+        height: 320px; /* Slightly reduced */
+        margin-top: 0; /* Remove unnecessary margin */
+    }
+
+    .slide img {
+        height: 220px; /* Adjusted size */
+    }
+}
+
+/* For 400px width and below */
+@media (max-width: 400px) {
+    .image-slider {
+        height: 300px; 
+        margin-top: 0; /* Ensure no extra margin */
+    }
+
+    .slide img {
+        height: 200px; 
+    }
+}
