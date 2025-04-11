@@ -187,28 +187,7 @@ const Home = () => {
                     </>}
                 </div>
             </section>
-            {/* <section className="page-section" id="about">
-                <div className="container">
-                    <div className="text-center">
-                        <h2 className="section-heading text-uppercase">About Us</h2>
-                        <h3 className="section-subheading text-muted">Learn more about our community</h3>
-                    </div>
-                </div>
-            </section>
-            <section className="page-section bg-light" id="faculties">
-                <div className="container">
-                    <h2 className="section-heading text-center">Our Efficient Faculties</h2>
-                    <hr className="divider my-4" />
-                    Placeholders for faculties content
-                </div>
-            </section>
-            <section className="page-section" id="forums">
-                <div className="container">
-                    <h2 className="section-heading text-center">Forums</h2>
-                    <hr className="divider my-4" />
-                    Placeholders for forums content
-                </div>
-            </section> */}
+            
         </div>
     )
 }

@@ -79,7 +79,7 @@ function AppRouter() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-       (
+        {isLoggedIn && isAdmin && (
           <Route path="/dashboard" element={
             // <PrivateRoute>
             <Dashboard />
@@ -100,7 +100,7 @@ function AppRouter() {
             <Route path="/dashboard/users/manage" element={<ManageUser />} />
             <Route path="/dashboard/alumni/view" element={<ViewAlumni />} />
           </Route>
-        )
+        )}
         <Route path="events/view" element={<View_Event />} />
         {isLoggedIn && <Route path="account" element={<MyAccount />} />}
         <Route path="forum/view" element={<View_Forum />} />

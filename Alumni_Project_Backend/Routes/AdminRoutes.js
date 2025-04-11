@@ -3,7 +3,9 @@ import con from "../utils/db.js";
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt"; 
+import bcrypt from 'bcryptjs';
+
 import sendEmail from "../utils/mailer.js";
 
 const router = express.Router();
