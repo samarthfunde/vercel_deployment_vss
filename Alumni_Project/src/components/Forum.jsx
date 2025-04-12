@@ -9,7 +9,7 @@ import { baseUrl } from '../utils/globalurl';
 
 
 const Forum = () => {
-    const { isLoggedIn, isAdmin } = useAuth();
+    const { isLoggedIn, isAdmin,isStudent } = useAuth();
     const [forum, setForum] = useState([]);
     const [filteredForum, setFilteredForum] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -58,9 +58,19 @@ const Forum = () => {
                             <div className="row col-md-12 mb-2 justify-content-center">
                                 {/* <button className="btn btn-primary btn-block col-sm-4" type="button" id="new_forum"><FaPlus/> Create New Topic</button>
                                  */}
-                                {isLoggedIn ?
-                                    <> {handleAdd ? <></> : (<button onClick={() => setHandleAdd(true)} className="btn btn-primary btn-block col-sm-4" type="button" id="new_career"><FaPlus /> Create New Topic</button>)}
-                                    </> : <p className='text-white'>Please Login to create new topic.</p>}
+                               {isLoggedIn && !isStudent ? 
+                                      <> 
+                                          {handleAdd ? 
+                                              <></> : 
+                                              (<button onClick={() => setHandleAdd(true)} className="btn btn-primary btn-block col-sm-4" type="button" id="new_career"><FaPlus /> Post a Forum topic</button>)
+                                          }
+                                      </> 
+                                  : 
+                                      isLoggedIn && isStudent ? 
+                                      <p className='text-white'>check Forum topic</p> 
+                                      : 
+                                          <p className='text-white'>Please Login to post jobs.</p>
+                                  }
                             </div>
                         </div>
 

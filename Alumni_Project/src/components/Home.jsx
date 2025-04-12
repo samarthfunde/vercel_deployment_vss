@@ -9,6 +9,7 @@ import { useTheme } from '../ThemeContext';
 import imgcs from "../assets/uploads/pd_img.png";
 import { baseUrl } from '../utils/globalurl';
 import ImageSlide from './Slide_Image';
+import { HiOutlineBriefcase } from 'react-icons/hi';
 // import head_cover from "../assets/uploads/head_cover.jpg";
 // import img3 from "../assets/uploads/gallery/img3.jpg"
 
@@ -130,26 +131,26 @@ const Home = () => {
                             <div className="card h-100 benefit-card">
                                 <div className="card-body text-center">
                                     <FiBook size={40} className="mb-3 text-primary" />
-                                    <h4 className="card-title">Library</h4>
-                                    <p className="card-text">Access to the alumni library.</p>
+                                    <h4 className="card-title">Mentorship & Guidance</h4>
+                                    <p className="card-text">Alumni can mentor students on career choices, industry trends, and higher studies.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-6 mb-4">
-                            <div className="card h-100 benefit-card">
-                                <div className="card-body text-center">
-                                    <FiTool size={40} className="mb-3 text-primary" />
-                                    <h4 className="card-title">Sports Facilities</h4>
-                                    <p className="card-text">Access to sports facilities.</p>
-                                </div>
-                            </div>
-                        </div>
+    <div className="card h-100 benefit-card">
+        <div className="card-body text-center">
+            <HiOutlineBriefcase size={40} className="mb-3 text-primary" />
+            <h4 className="card-title">Internships & Job Opportunities</h4>
+            <p className="card-text">Alumni working in companies often refer students for internships and jobs.</p>
+        </div>
+    </div>
+</div>
                         <div className="col-lg-3 col-sm-6 mb-4">
                             <div className="card h-100 benefit-card">
                                 <div className="card-body text-center">
                                     <FiUsers size={40} className="mb-3 text-primary  " />
-                                    <h4 className="card-title">Alumni Directory</h4>
-                                    <p className="card-text">Connect with fellow alumni.</p>
+                                    <h4 className="card-title">Networking & Professional Contacts</h4>
+                                    <p className="card-text">Building such a network early helps in finding jobs, projects, or collaborations.</p>
                                 </div>
                             </div>
                         </div>
