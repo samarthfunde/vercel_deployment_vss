@@ -1,53 +1,57 @@
-import React from 'react';
-import { FaEnvelope, FaPhone } from 'react-icons/fa';
-import { useTheme } from '../ThemeContext';
-import { GoVerified } from "react-icons/go";
-
+import React from "react";
+import '../styles/Footer.css';
+import { Link } from 'react-router-dom';
+import fb from '../assets/fb.png';
+import twitter from '../assets/twitter.png';
+import insta from '../assets/insta.png';
+import linkedin from '../assets/linkedin.png';
+import yt from '../assets/yt.png';
 
 const Footer = () => {
-  const { theme } = useTheme();
-
-  const footerClasses = `py-5 bg-${theme} text-${theme === 'dark' ? 'white' : 'black'}`;
-  const iconClasses = `fa-3x mb-3 text-${theme === 'dark' ? 'gray-500' : 'muted'}`;
-  const devfooter = "</> by ";
-
   return (
-    <>
-      <footer className={footerClasses}>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8 text-center">
-              <h2 className="mt-0 text-${theme === 'dark' ? 'white' : 'muted'}">Contact us</h2>
-              <hr className="divider my-4" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
-              <FaPhone className={iconClasses} />
-              <div className="text-${theme === 'dark' ? 'white' : 'black'}">(+91) 9604156915</div>
-            </div>
-            <div className="col-lg-4 mr-auto text-center">
-              <FaEnvelope className={iconClasses} />
-              <a className="d-block" href="mailto:cs@bzu.edu.pk">samiti.org</a>
-            </div>
-          </div>
-        </div>
-        <br />
-        <div className="container">
-         
-        <div className={`small text-center text-${theme === 'dark' ? 'gray-400' : 'muted'}`}>
-  <strong className="text-danger"> Disclaimer: </strong>  
-  The contents in the website are for information purpose only. We attempt to ensure that the information on this website is correct, however, we do not warrant its completeness or accuracy. No rights can be derived from the information contained in the VSS Pune website. The website may contain links to websites of third-party organizations. VSS Pune cannot be held responsible for any consequences arising from the use of information obtained from these websites. {devfooter}  
-  <a target="_blank" rel="noreferrer">
-    Vidyarthi Sahayyak Samiti, Pune
-    <GoVerified style={{ fontSize: "12px", marginLeft: "2px", color: "#03b3ff" }} />
-  </a>
-</div>
+    <div className="footer">
+      <div className="sb_footer section_padding">
 
+        <div className="footer_links_centered">
+          <Link to="/"><p>Home</p></Link>
+          <Link to="/alumni"><p>Alumni</p></Link>
+          <Link to="/gallery"><p>Gallery</p></Link>
+          <Link to="/jobs"><p>Jobs</p></Link>
+          <Link to="/forums"><p>Forums</p></Link>
+          <Link to="/about"><p>About</p></Link>
         </div>
-      </footer>
-    </>
+
+        <div className="socialmedia_centered">
+          <a href="https://www.facebook.com/VidyarthiSahayakSamiti" target="_blank" rel="noopener noreferrer">
+            <img src={fb} alt="fb" />
+          </a>
+         
+          <a href="https://x.com/i/flow/login?redirect_after_login=%2FSamitiOfficial" target="_blank" rel="noopener noreferrer">
+            <img src={twitter} alt="twitter" />
+          </a>
+          <a href="https://www.linkedin.com/company/vidyarthi-sahayyak-samiti-pune/" target="_blank" rel="noopener noreferrer">
+            <img src={linkedin} alt="linkedin" />
+          </a>
+          <a href="https://www.instagram.com/vidyarthi_sahayyak_samiti/" target="_blank" rel="noopener noreferrer">
+            <img src={insta} alt="insta" />
+          </a>
+          <a href="https://www.youtube.com/channel/UC2Eo8WW7qWz7ki2QyPR5NxA" target="_blank" rel="noopener noreferrer">
+            <img src={yt} alt="yt" />
+          </a>
+          
+        </div>
+
+        <hr />
+
+        <div className="sb_footer-below centered_text">
+          <p>
+            Vidyarthi Sahayyak Samiti | @ 2025 All Rights Reserved | Developed By Students
+          </p>
+        </div>
+
+      </div>
+    </div>
   );
-};
+}
 
 export default Footer;

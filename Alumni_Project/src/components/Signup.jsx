@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../utils/globalurl';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const [values, setValues] = useState({
@@ -11,40 +12,48 @@ const Signup = () => {
         password: "",
         userType: "",
         course_id: "",
+        grn_number: "", // Added
     });
+
     const [courses, setCourses] = useState([]);
-
-
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(values);
+
         axios.post(`${baseUrl}auth/signup`, values)
             .then((res) => {
                 if (res.data.email) {
                     return toast.warning("Email Already Exists");
                 }
+
                 if (res.data.signupStatus) {
                     toast.success(res.data.message);
                     setTimeout(() => {
-                        navigate("/login", { state: { action: "navtologin" } })
-                    }, 2000)
+                        navigate("/login", { state: { action: "navtologin" } });
+                    }, 2000);
                 } else {
                     toast.error("An error occurred");
                 }
             })
-            .catch(err => console.log(err))
-    }
+            .catch(err => {
+                console.error("Signup error:", err);
+
+                const errorMsg = err?.response?.data?.sqlMessage ||
+                    err?.response?.data?.message ||
+                    "An unexpected error occurred";
+
+                toast.error(errorMsg);
+            });
+    };
 
     useEffect(() => {
         axios.get(`${baseUrl}auth/courses`)
             .then((res) => {
                 setCourses(res.data);
             })
-            .catch(err => console.log(err))
-    }, [])
-
+            .catch(err => console.log(err));
+    }, []);
 
     return (
         <>
@@ -59,6 +68,7 @@ const Signup = () => {
                     </div>
                 </div>
             </header>
+
             <div className="container mt-3 pt-2">
                 <div className="col-lg-12">
                     <div className="card mb-4">
@@ -68,36 +78,89 @@ const Signup = () => {
                                     <form onSubmit={handleSubmit} id="create_account">
                                         <div className="form-group">
                                             <label htmlFor="name" className="control-label">Name</label>
-                                            <input onChange={(e) => setValues({ ...values, name: e.target.value })} type="text" className="form-control" id="name" name="name" required />
+                                            <input
+                                                onChange={(e) => setValues({ ...values, name: e.target.value })}
+                                                type="text"
+                                                className="form-control"
+                                                id="name"
+                                                name="name"
+                                                required
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="email" className="control-label">Email</label>
-                                            <input onChange={(e) => setValues({ ...values, email: e.target.value })} type="email" className="form-control" id="email" name="email" required />
+                                            <input
+                                                onChange={(e) => setValues({ ...values, email: e.target.value })}
+                                                type="email"
+                                                className="form-control"
+                                                id="email"
+                                                name="email"
+                                                required
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="password" className="control-label">Password</label>
-                                            <input onChange={(e) => setValues({ ...values, password: e.target.value })} type="password" className="form-control" id="password" name="password" required />
+                                            <input
+                                                onChange={(e) => setValues({ ...values, password: e.target.value })}
+                                                type="password"
+                                                className="form-control"
+                                                id="password"
+                                                name="password"
+                                                required
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="userType" className="control-label">User Type</label>
-                                            <select onChange={(e) => setValues({ ...values, userType: e.target.value })} className="custom-select" id="userType" name="userType" required defaultValue="">
+                                            <select
+                                                onChange={(e) => setValues({ ...values, userType: e.target.value })}
+                                                className="custom-select"
+                                                id="userType"
+                                                name="userType"
+                                                required
+                                                value={values.userType}
+                                            >
                                                 <option value="" disabled>Please select</option>
                                                 <option value="alumnus">Alumnus</option>
                                                 <option value="admin">Admin</option>
+                                                <option value="student">Student</option>
                                             </select>
                                         </div>
-                                        {values.userType === "alumnus" &&
+
+                                        {/* Conditionally show Course selector for alumnus */}
+                                        {values.userType === "alumnus" && (
                                             <div className="form-group">
                                                 <label htmlFor="course_id" className="control-label">Course</label>
-                                                <select onChange={(e) => setValues({ ...values, course_id: e.target.value })} className="form-control select2" name="course_id" required value={values.course_id}>
+                                                <select
+                                                    onChange={(e) => setValues({ ...values, course_id: e.target.value })}
+                                                    className="form-control select2"
+                                                    name="course_id"
+                                                    required
+                                                    value={values.course_id}
+                                                >
                                                     <option disabled value="">Select course</option>
-                                                    {courses
-                                                    .map(c => (
+                                                    {courses.map(c => (
                                                         <option key={c.id} value={c.id}>{c.course}</option>
                                                     ))}
                                                 </select>
                                             </div>
-                                        }
+                                        )}
+
+                                        {/* Conditionally show GRN Number for student */}
+                                        {values.userType === "student" && (
+                                            <div className="form-group">
+                                                <label htmlFor="grn_number" className="control-label">GRN Number</label>
+                                                <input
+                                                    onChange={(e) => setValues({ ...values, grn_number: e.target.value })}
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="grn_number"
+                                                    name="grn_number"
+                                                    required
+                                                    value={values.grn_number}
+                                                />
+                                            </div>
+                                        )}
+
                                         <hr className="divider" />
                                         <div className="row justify-content-center">
                                             <div className="col-md-6 text-center">
@@ -112,7 +175,7 @@ const Signup = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Signup
+export default Signup;

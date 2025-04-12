@@ -67,6 +67,7 @@ const ManageUser = () => {
                             <option value="" disabled>Please select type</option>
                             <option value="alumnus">Alumnus</option>
                             <option value="admin">Admin</option>
+                            <option value="student">Student</option>
                         </select>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>

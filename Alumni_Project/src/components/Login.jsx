@@ -36,7 +36,8 @@ const Login = () => {
                     localStorage.setItem("user_name", res.data.userName);
                     localStorage.setItem("alumnus_id", res.data.alumnus_id);
                     login();
-                    navigate("/", { state: { action: "homelogin" } });
+                    navigate("/", { state: { action: "homelogin" } }); 
+                    window.location.reload();
                 } else {
                     setErrors(res.data.Error)
                 }

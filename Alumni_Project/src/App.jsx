@@ -37,6 +37,7 @@ import 'react-quill/dist/quill.snow.css';
 import { ThemeProvider } from "./ThemeContext";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./components/NotFound";
+import IsLogin from "./components/Is_Login";
 
 function App() {
   return (
@@ -71,11 +72,25 @@ function AppRouter() {
       {!isDashboardRoute && <Header />}
       <Routes>
         <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} /> 
+        {isLoggedIn ? (
+    <>
         <Route path="/alumni" element={<AlumniList />} />
-        <Route path="/gallery" element={<Gallery />} />
         <Route path="/jobs" element={<Careers />} />
-        <Route path="/forums" element={<Forum />} />
+    </>
+):(   
+
+  <>  
+     <Route path="/alumni" element={<IsLogin/>}/> 
+     <Route path="/jobs" element={<IsLogin />} />
+  </>
+  
+)}
+
+       
+        <Route path="/gallery" element={<Gallery />} />
+        
+        <Route path="/forums" element={<Forum />}/>
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
