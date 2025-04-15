@@ -16,42 +16,54 @@ const MyAccount = () => {
     });
     const [file, setFile] = useState(null);
     const [courses, setCourses] = useState([]);
+
     useEffect(() => {
         const alumnus_id = localStorage.getItem("alumnus_id");
+      // console.log("DEBUG: Fetched alumnus_id from localStorage:", alumnus_id); // DEBUG
+
         const fetchData = async () => {
             try {
                 const alumnusDetailsRes = await axios.get(`${baseUrl}auth/alumnusdetails?id=${alumnus_id}`);
-                const coursesRes = await axios.get(`${baseUrl}auth/courses`);
+                //console.log("DEBUG: alumnusDetailsRes.data:", alumnusDetailsRes.data); // DEBUG
 
+                const coursesRes = await axios.get(`${baseUrl}auth/courses`);
+                //console.log("DEBUG: coursesRes.data:", coursesRes.data); // DEBUG 
+                
+                
                 setAcc(alumnusDetailsRes.data[0]);
                 setCourses(coursesRes.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                // Optionally display an error message to the user
             }
         };
         fetchData();
     }, []);
 
-
     const handleChange = (e) => {
+       // console.log(`DEBUG: Changed field ${e.target.name} = ${e.target.value}`); // DEBUG
         setAcc({ ...acc, [e.target.name]: e.target.value });
     };
 
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+        const selectedFile = event.target.files[0];
+       // console.log("DEBUG: File selected:", selectedFile); // DEBUG
+        setFile(selectedFile);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const alumnus_id = localStorage.getItem("alumnus_id");
         const user_id = localStorage.getItem("user_id");
-        const pswrd = document.getElementById("pswrd").value
+        const pswrd = document.getElementById("pswrd").value;
+
+       // console.log("DEBUG: Form submit triggered"); // DEBUG
+       // console.log("DEBUG: Password entered:", pswrd); // DEBUG
+      //  console.log("DEBUG: Account state before submit:", acc); // DEBUG
+       // console.log("DEBUG: File to upload:", file); // DEBUG
+
         try {
             const formData = new FormData();
-            // if (file) {
-                formData.append('image', file);
-            // }
+            formData.append('image', file);
             formData.append('name', acc.name);
             formData.append('connected_to', acc.connected_to);
             formData.append('course_id', acc.course_id);
@@ -61,8 +73,6 @@ const MyAccount = () => {
             formData.append('batch', acc.batch);
             formData.append('alumnus_id', alumnus_id);
             formData.append('user_id', user_id);
-            // console.log(pswrd);
-            // console.log(acc.password);
 
             const response = await axios.put(`${baseUrl}auth/upaccount`, formData, {
                 headers: {
@@ -70,7 +80,9 @@ const MyAccount = () => {
                 }
             });
 
-            toast.success(response.data.message)
+           // console.log("DEBUG: Server response after update:", response.data); // DEBUG
+
+            toast.success(response.data.message);
             setFile(null);
             setAcc({
                 name: '',
@@ -82,8 +94,8 @@ const MyAccount = () => {
                 batch: "",
             });
         } catch (error) {
+            console.error('Error:', error); // DEBUG
             toast.error('An error occurred');
-            console.error('Error:', error);
         }
     };
 
@@ -129,8 +141,10 @@ const MyAccount = () => {
                                 <div className="form-group row">
                                     <label htmlFor="" className="col-sm-2 col-form-label">Course Graduated</label>
                                     <div className="col-sm-10">
-                                        <select onChange={handleChange} className="form-control select2" name="course_id" required value={acc.course_id}>
-                                            <option disabled value="">Select course</option>
+                                        {/* <select onChange={handleChange} className="form-control select2" name="course_id" required value={acc.course_id}> */}
+                                        <select onChange={handleChange} className="form-control select2" name="course_id"  value={acc.course_id}>
+                                            <option disabled value="">Select course</option> 
+                                            
                                             {courses.map(c => (
                                                 <option key={c.id} value={c.id}>{c.course}</option>
                                             ))}

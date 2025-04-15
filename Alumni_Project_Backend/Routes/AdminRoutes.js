@@ -44,6 +44,24 @@ const galleryUpload = multer({ storage: galleryStorage });
 
 
 // app.use(express.static('Public'));
+router.get('/alumnusdetails', (req, res) => {
+    const alumnusId = req.query.id; // Get the ID from query parameters
+
+    const sql = "SELECT * FROM alumnus_bio WHERE id = ?";
+    con.query(sql, [alumnusId], (err, result) => {
+        if (err) {
+            console.error("Error executing SQL query:", err);
+            return res.status(500).json({ error: "Query Error" });
+        }
+
+        if (result.length > 0) {
+            return res.json(result); // Send as array to match frontend logic
+        } else {
+            return res.status(404).json({ message: "Alumnus not found" });
+        }
+    });
+});
+
 
 router.post("/login", (req, res) => {
     const sql = "SELECT * from users Where email=?";
@@ -129,8 +147,8 @@ router.post("/login", (req, res) => {
 //         console.error("Error hashing password:", error);
 //         return res.status(500).json({ error: "Password Hashing Error", signupStatus: false });
 //     }
-// });
- 
+// }); 
+
 
 
 router.post("/signup", async (req, res) => {
@@ -306,15 +324,28 @@ router.delete('/jobs/:id', (req, res) => {
     })
 
 });
+// router.get('/courses', (req, res) => {
+//     const sql = "SELECT * FROM courses";
+//     con.query(sql, (err, result) => {
+//         if (err) {
+//             return res.json({ Error: "Query Error" })
+//         }
+//         return res.json(result);
+//     })
+// }); 
 router.get('/courses', (req, res) => {
     const sql = "SELECT * FROM courses";
+
     con.query(sql, (err, result) => {
         if (err) {
-            return res.json({ Error: "Query Error" })
+            console.error("Error retrieving courses:", err);
+            return res.status(500).json({ error: "Query Error" });
         }
-        return res.json(result);
-    })
+
+        return res.json(result); // Send the list of courses as an array
+    });
 });
+
 
 router.delete('/courses/:id', (req, res) => {
     // const cid = req.params.id;
