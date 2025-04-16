@@ -15,6 +15,13 @@ const Footer = () => {
         <div className="footer_links_centered">
           <Link to="/"><p>Home</p></Link>
           <Link to="/alumni"><p>Alumni</p></Link>
+          <a
+    href="https://mvmsamiti.org/donation/"
+    className="donate-button"
+    onClick={() => window.location.href = "https://mvmsamiti.org/donation/"}
+  >
+    <p>Donate</p>
+  </a>
           <Link to="/gallery"><p>Gallery</p></Link>
           <Link to="/jobs"><p>Jobs</p></Link>
           <Link to="/forums"><p>Forums</p></Link>
